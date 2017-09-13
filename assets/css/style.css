@@ -1,0 +1,19 @@
+body {
+	background: grey;
+}
+.col-12{
+	margin: 0 auto;
+	text-align: center;
+}
+.col-6{
+	margin: 0 auto;
+	text-align: center;
+}
+.carousel-inner {
+	width: 100%;
+	height: 400px;
+}
+.carousel-item {
+	width: 100%;
+	height: 100%;
+}
