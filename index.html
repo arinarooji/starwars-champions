@@ -8,6 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
@@ -24,22 +26,12 @@
                 <h2>STAR WARS GAME</h2>
             </section>
             </div>
-
-            <!--Score row-->
-            <div class="row">
-            <section class="col-6">
-                <h4>WINS</h4>
-            </section>
-            <section class="col-6">
-                <h4>LOSSES</h4>
-            </section>
-            </div>
             <br>
 
             <!--Full character row-->
             <div class="row">
             <section class="col-6">
-                <h4>PLAYER</h4>
+                <h4 id="playerName">PLAYER</h4>
                 <div id="carousel-1" class="carousel slide" data-ride="carousel" data-interval = "false">
                     <ol id = "indicators-1" class="carousel-indicators">
                         <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
@@ -81,7 +73,7 @@
                 </div>
             </section>
             <section class="col-6">
-                <h4>OPPONENT</h4>
+                <h4 id="enemyName">OPPONENT</h4>
                 <div id="carousel-2" class="carousel slide" data-ride="carousel" data-interval = "false">
                     <ol id = "indicators-2" class="carousel-indicators">
                         <li data-target="#carousel-2" data-slide-to="0" class="active"></li>
@@ -125,14 +117,6 @@
             </div>
             <br>
 
-            <!--Current opponent row
-            <div class="row">
-            <section class="col-12">
-                <h4>CURRENT OPPONENT</h4>
-                <img src="">
-            </section>
-            </div>-->
-
             <!--Health row-->
             <div class="row">
             <section class="col-6">
@@ -148,13 +132,15 @@
             </div>
             <br>
 
-            <!--Action row-->
+            <!--SCORE ROW-->
             <div class="row">
             <section class="col-6">
-                <h5>BATTLE LOG</h5>
+                <h5 id="WINS"></h5>
+                <h5 id="LOSSES"></h5>
             </section>
             <section class="col-6">
-                <button type="button" class="btn btn-danger">ATTACK</button>
+                <button type="button" id="heavy-button" class="btn btn-primary">HEAVY ATTACK</button>
+                
             </section>
             </div>
           

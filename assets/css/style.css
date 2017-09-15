@@ -1,11 +1,19 @@
 body {
 	background: grey;
 }
-.col-12{
+h2 {
+	font-family: 'Russo One', sans-serif;
+	font-size: 300%;
+}
+h4, h5 {
+	font-family: 'Russo One', sans-serif;
+
+}
+.col-12 {
 	margin: 0 auto;
 	text-align: center;
 }
-.col-6{
+.col-6 {
 	margin: 0 auto;
 	text-align: center;
 }
