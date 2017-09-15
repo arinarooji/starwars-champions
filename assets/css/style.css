@@ -1,13 +1,19 @@
 body {
-	background: grey;
+	background: url("../images/dark_geometric.png");
+	background-repeat: repeat;
 }
 h2 {
 	font-family: 'Russo One', sans-serif;
 	font-size: 300%;
+	color: white;
 }
-h4, h5 {
+h3 {
 	font-family: 'Russo One', sans-serif;
-
+	color: white;
+}
+h4, h5, p {
+	font-family: 'Russo One', sans-serif;
+	color: #ff9000;
 }
 .col-12 {
 	margin: 0 auto;
