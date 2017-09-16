@@ -2,42 +2,43 @@
 	var darthVader = {
 		id: "VADER",
 		health: 100,
-		attack: 24,
+		attack: 20,
 		lightAttack: 10,
 		sabers: [" Vader's"]
 	};
 	var masterYoda = {
 		id: "YODA",
 		health: 100,
-		attack: 22,
-		lightAttack: 12,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Yoda's"]
 	};
 	var kyloRen = {
 		id: "KYLO",
 		health: 100,
-		attack: 21,
-		lightAttack: 12,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Kylo's"]
 	};
 	var reySkywalker = {
 		id: "REY",
 		health: 100,
-		attack: 21,
-		lightAttack: 12,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Rey's"]
 	};
 	var lukeSkywalker = {
 		id: "LUKE",
 		health: 100,
-		attack: 21,
-		lightAttack: 12,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Luke's"]
 	};
 	var characters = [darthVader, masterYoda, kyloRen, reySkywalker, lukeSkywalker];
 	var player;
 	var playerIndex = 0;
 	var playerSelected = false;
+	var playerMultiplier = 1.00;
 	var newPlayerHealth;
 	var enemy;
 	var newEnemyHealth;
@@ -129,7 +130,7 @@
 			heavySounds ++;
 			if(heavySounds > 2){heavySounds = 0;}
 
-			newEnemyHealth -= Math.floor(Math.random() * player.attack);
+			newEnemyHealth -= (Math.floor(Math.random() * player.attack)) * playerMultiplier;
 			console.log(newEnemyHealth);
 			newPlayerHealth -= Math.floor(Math.random() * enemy.attack);
 			$(".bg-danger").css("width", newEnemyHealth + "%");
@@ -148,7 +149,7 @@
 			lightSounds ++;
 			if(lightSounds > 2){lightSounds = 0;}
 
-			newEnemyHealth -= Math.floor(Math.random() * player.lightAttack);
+			newEnemyHealth -= (Math.floor(Math.random() * player.lightAttack)) * playerMultiplier;
 			newPlayerHealth -= Math.floor(Math.random() * enemy.lightAttack);
 			$(".bg-danger").css("width", newEnemyHealth + "%");
 			$(".bg-success").css("width", newPlayerHealth + "%");
@@ -161,6 +162,7 @@
 			if(newEnemyHealth <= 0){
 				enemy.defeated = true;
 				wins += 1;
+				playerMultiplier += 0.01;
 				newPlayerHealth = player.health;
 				$("#enemyName").html("OPPONENT");
 				$("#heavy-button").hide();
@@ -182,6 +184,7 @@
 			if(newPlayerHealth <= 0){
 				player.defeated = true;
 				playerSelected = false;
+				playerMultiplier = 1.00;
 				losses += 1;
 				//Remove all acquired sabers besides their own
 				for(var n = player.sabers.length - 1; n > 0; n--){
