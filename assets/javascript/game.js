@@ -2,36 +2,36 @@
 	var darthVader = {
 		id: "VADER",
 		health: 100,
-		attack: 21,
-		lightAttack: 11,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Vader's"]
 	};
 	var masterYoda = {
 		id: "YODA",
 		health: 100,
-		attack: 22,
-		lightAttack: 12,
+		attack: 23,
+		lightAttack: 13,
 		sabers: [" Yoda's"]
 	};
 	var kyloRen = {
 		id: "KYLO",
 		health: 100,
-		attack: 20,
+		attack: 19,
 		lightAttack: 10,
 		sabers: [" Kylo's"]
 	};
 	var reySkywalker = {
 		id: "REY",
 		health: 100,
-		attack: 20,
-		lightAttack: 11,
+		attack: 19,
+		lightAttack: 10,
 		sabers: [" Rey's"]
 	};
 	var lukeSkywalker = {
 		id: "LUKE",
 		health: 100,
-		attack: 21,
-		lightAttack: 11,
+		attack: 20,
+		lightAttack: 10,
 		sabers: [" Luke's"]
 	};
 	var characters = [darthVader, masterYoda, kyloRen, reySkywalker, lukeSkywalker];
