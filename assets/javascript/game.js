@@ -3,20 +3,20 @@
 		id: "VADER",
 		health: 100,
 		attack: 21,
-		lightAttack: 10,
+		lightAttack: 11,
 		sabers: [" Vader's"]
 	};
 	var masterYoda = {
 		id: "YODA",
 		health: 100,
-		attack: 20,
-		lightAttack: 11,
+		attack: 22,
+		lightAttack: 12,
 		sabers: [" Yoda's"]
 	};
 	var kyloRen = {
 		id: "KYLO",
 		health: 100,
-		attack: 21,
+		attack: 20,
 		lightAttack: 10,
 		sabers: [" Kylo's"]
 	};
@@ -30,7 +30,7 @@
 	var lukeSkywalker = {
 		id: "LUKE",
 		health: 100,
-		attack: 20,
+		attack: 21,
 		lightAttack: 11,
 		sabers: [" Luke's"]
 	};
@@ -168,7 +168,7 @@
 					$("#CHAMPWINS").html("CHAMPION WINS: " + winsAsChampion);
 				}
 				else{wins += 1;}
-				playerMultiplier += 0.01;
+				playerMultiplier += 0.05;
 				newPlayerHealth = player.health;
 				$("#enemyName").html("OPPONENT");
 				$("#heavy-button").hide();
