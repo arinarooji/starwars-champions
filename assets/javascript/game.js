@@ -2,7 +2,7 @@
 	var darthVader = {
 		id: "VADER",
 		health: 100,
-		attack: 20,
+		attack: 21,
 		lightAttack: 10,
 		sabers: [" Vader's"]
 	};
@@ -10,13 +10,13 @@
 		id: "YODA",
 		health: 100,
 		attack: 20,
-		lightAttack: 10,
+		lightAttack: 11,
 		sabers: [" Yoda's"]
 	};
 	var kyloRen = {
 		id: "KYLO",
 		health: 100,
-		attack: 20,
+		attack: 21,
 		lightAttack: 10,
 		sabers: [" Kylo's"]
 	};
@@ -24,14 +24,14 @@
 		id: "REY",
 		health: 100,
 		attack: 20,
-		lightAttack: 10,
+		lightAttack: 11,
 		sabers: [" Rey's"]
 	};
 	var lukeSkywalker = {
 		id: "LUKE",
 		health: 100,
 		attack: 20,
-		lightAttack: 10,
+		lightAttack: 11,
 		sabers: [" Luke's"]
 	};
 	var characters = [darthVader, masterYoda, kyloRen, reySkywalker, lukeSkywalker];
@@ -44,6 +44,8 @@
 	var newEnemyHealth;
 	var wins = 0;
 	var losses = 0;
+	var champion = false;
+	var winsAsChampion = 0;
 
 
 	$(document).ready(function(){
@@ -158,10 +160,14 @@
 	
 		//Check health levels on every button click
 		$(".btn").on("click", function(){
-			//If enemy dies, pick a new enemy
+			//If enemy dies
 			if(newEnemyHealth <= 0){
 				enemy.defeated = true;
-				wins += 1;
+				if(champion){
+					winsAsChampion++;
+					$("#CHAMPWINS").html("CHAMPION WINS: " + winsAsChampion);
+				}
+				else{wins += 1;}
 				playerMultiplier += 0.01;
 				newPlayerHealth = player.health;
 				$("#enemyName").html("OPPONENT");
@@ -177,16 +183,20 @@
 					$("#SABERS").html("LIGHTSABERS: " + player.sabers);
 				}
 				if(player.sabers.length === characters.length){
-					alert("YOU ARE THE GALACTIC CHAMPION!");
+					if(!champion){
+						alert("YOU ARE THE GALACTIC CHAMPION!");
+						champion = true;
+					}
 				}
 			}
-			//If player dies, pick a new player
+			//If player dies
 			if(newPlayerHealth <= 0){
 				player.defeated = true;
 				playerSelected = false;
+				champion = false;
 				playerMultiplier = 1.00;
 				losses += 1;
-				//Remove all acquired sabers besides their own
+				//Remove all acquired sabers
 				for(var n = player.sabers.length - 1; n > 0; n--){
 					player.sabers.pop();
 					$("#SABERS").html("LIGHTSABER: " + player.sabers);
