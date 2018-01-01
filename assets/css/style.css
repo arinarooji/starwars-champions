@@ -1,37 +1,14 @@
-body {
-	background: url("../images/dark_geometric.png");
-	background-repeat: repeat;
-}
-h2 {
-	font-family: 'Russo One', sans-serif;
-	font-size: 300%;
-	color: white;
-}
-h3 {
-	font-family: 'Russo One', sans-serif;
-	color: white;
-}
-h4, h5 {
-	font-family: 'Russo One', sans-serif;
-	color: #ff9000;
-}
-.col-12 {
-	margin: 0 auto;
-	text-align: center;
-}
-.col-6 {
-	margin: 0 auto;
-	text-align: center;
-}
-.carousel-inner {
-	width: 100%;
-	height: 400px;
-}
-.carousel-item {
-	width: 100%;
-	height: 100%;
-}
-#SABERS {
-	font-size: 20px;
-	color: #ff9000;
-}
+body { background: url("../images/dark_geometric.png"); background-repeat: repeat; }
+
+h2, h3, h4, h5 { font-family: 'Russo One', sans-serif; }
+
+h2 	   { font-size: 300%; color: white; }
+h3 	   { color: white; }
+h4, h5 { color: #ff9000; }
+
+.carousel-inner { width: 100%; height: 400px; }
+.carousel-item 	{ width: 100%; height: 100%; }
+.carousel-item:hover { cursor: pointer; }
+
+/* Lightsaber Inventory */
+#SABERS { font-size: 20px; color: #ff9000; }
