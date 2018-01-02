@@ -14,8 +14,7 @@ $(document).ready(function(){
 	//Global player/enemy variables
 	var player, playerHealth;
 	var enemy, enemyHealth;
-	var wins   = 0;
-	var losses = 0;
+	var wins = 0, losses = 0;
 	var championWins = 0;
 	var playerMultiplier = 1.00;
 	var champion = false;
@@ -46,12 +45,13 @@ $(document).ready(function(){
 	themeSong.loop = true;
 	$(themeSong).trigger('play');
 
-	//PLAYER selection
-	$(".img-1").on("click", function(){
+	//CHARACTER selections (Player and Enemy)
+	$(".player, .enemy").on("click", function(){
 		//Iterate through characters[]
 		for (var i = 0; i < characters.length; i++) {
-			//If the selected id equals current character id and the player has not selected...
-			if ($(this).attr("id") === characters[i].id && !playerSelected) {
+			
+			//If the selected element has player class, id equals iterated character id, and the player IS NOT selected...
+			if ($(this).hasClass("player") && $(this).attr("id") === characters[i].id && !playerSelected) {
 				
 				//The player has now selected a character
 				player = characters[i];
@@ -61,19 +61,13 @@ $(document).ready(function(){
 				//Update the DOM (name, saber inventory, health bar, hide carousel-1 controls)
 				$("#playerName").html(player.id);
 				$("#SABERS").html("LIGHTSABER: " + player.sabers);
-				$(".bg-success").css("width", playerHealth + "%");
+				$(".playerHealth").css("width", playerHealth + "%");
 				$("#carousel-1-prev, #carousel-1-next, #indicators-1").hide();
 				$(saberOn).trigger('play'); //Play the saberOn sound
 			}
-		}
-	});
 
-	//ENEMY selection
-	$(".img-2").on("click", function() {
-		//Iterate through characters[]
-		for (var i = 0; i < characters.length; i++) {
-			//If the selected id equals current character id, the player id is not identical, and player is selected...
-			if ($(this).attr("id") === characters[i].id && $(this).attr("id") !== player.id && playerSelected) {
+			//If the selected id equals current character id, the player id is not identical, and player IS selected...
+			else if ($(this).hasClass("enemy") && $(this).attr("id") === characters[i].id && $(this).attr("id") !== player.id && playerSelected) {
 				
 				//The enemy is now the selected character
 				enemy = characters[i];
@@ -81,7 +75,7 @@ $(document).ready(function(){
 
 				//Update DOM (name, health bar, hide carousel-2 controls, show attack btns)
 				$("#enemyName").html(enemy.id);
-				$(".bg-danger").css("width", enemyHealth + "%");
+				$(".enemyHealth").css("width", enemyHealth + "%");
 				$("#carousel-2-prev, #carousel-2-next, #indicators-2").hide();
 				$("#heavy-button, #light-button").show();
 				$(saberOn2).trigger('play'); //Play saberOn2 sound
@@ -98,8 +92,8 @@ $(document).ready(function(){
 		enemyHealth  -= (Math.floor(Math.random() * player.attack)) * playerMultiplier;
 		playerHealth -= Math.floor(Math.random() * enemy.attack);
 
-		$(".bg-danger").css("width", enemyHealth + "%");
-		$(".bg-success").css("width", playerHealth + "%");
+		$(".enemyHealth").css("width", enemyHealth + "%");
+		$(".playerHealth").css("width", playerHealth + "%");
 	});
 
 	//LIGHT ATTACK
@@ -111,8 +105,8 @@ $(document).ready(function(){
 		enemyHealth  -= (Math.floor(Math.random() * player.lightAttack)) * playerMultiplier;
 		playerHealth -= Math.floor(Math.random() * enemy.lightAttack);
 
-		$(".bg-danger").css("width", enemyHealth + "%");
-		$(".bg-success").css("width", playerHealth + "%");
+		$(".enemyHealth").css("width", enemyHealth + "%");
+		$(".playerHealth").css("width", playerHealth + "%");
 	});
 
 	//Check health levels on every button click
@@ -130,8 +124,8 @@ $(document).ready(function(){
 			$("#enemyName").html("OPPONENT");
 			$("#heavy-button, #light-button").hide();
 			$("#carousel-2-prev, #carousel-2-next, #indicators-2").show();
-			$(".bg-danger").css("width", enemyHealth + "%");
-			$(".bg-success").css("width", playerHealth + "%");
+			$(".enemyHealth").css("width", enemyHealth + "%");
+			$(".playerHealth").css("width", playerHealth + "%");
 			$("#WINS").html("WINS: " + wins);
 
 			//Check if the enemy's lightsaber is in player inventory
@@ -164,8 +158,8 @@ $(document).ready(function(){
 			$("#enemyName").html("OPPONENT");
 			$("#LOSSES").html("LOSSES: " + losses);
 			$("#heavy-button, #light-button").hide();
-			$(".bg-danger").css("width", enemyHealth + "%");
-			$(".bg-success").css("width", playerHealth + "%");
+			$(".enemyHealth").css("width", enemyHealth + "%");
+			$(".playerHealth").css("width", playerHealth + "%");
 			$("#carousel-1-prev, #carousel-1-next, #indicators-1, #carousel-2-prev, #carousel-2-next, #indicators-2").show();
 		}
 	});
