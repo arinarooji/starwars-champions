@@ -2,27 +2,24 @@
 $(document).ready(function(){
 	
 	//Character instances (ID, health, attack, lightAttack, sabers[])
-	var darthVader = new Character("VADER", 100, 20, 10, [" Vader's"]);
-	var masterYoda = new Character("YODA", 100, 23, 13, [" Yoda's"]);
-	var kylo       = new Character("KYLO", 100, 19, 10, [" Kylo's"]);
-	var rey 	   = new Character("REY", 100, 19, 10, [" Rey's"]);
-	var luke 	   = new Character("LUKE", 100, 23, 13, [" Luke's"]);
+	var vader = new Character("VADER", 100, 20, 10, [" Vader's"]);
+	var yoda  = new Character("YODA", 100, 23, 13, [" Yoda's"]);
+	var kylo  = new Character("KYLO", 100, 19, 10, [" Kylo's"]);
+	var rey   = new Character("REY", 100, 19, 10, [" Rey's"]);
+	var luke  = new Character("LUKE", 100, 23, 13, [" Luke's"]);
 
 	//Reference all character instances
-	var characters = [darthVader, masterYoda, kylo, rey, luke];
+	var characters = [vader, yoda, kylo, rey, luke];
 
 	//Global player/enemy variables
-	var player;
-	var wins  = 0;
+	var player, playerHealth;
+	var enemy, enemyHealth;
+	var wins   = 0;
 	var losses = 0;
-	var champion = false;
 	var championWins = 0;
-	var playerIndex  = 0;
-	var playerSelected 	 = false;
 	var playerMultiplier = 1.00;
-	var newPlayerHealth;
-	var enemy;
-	var newEnemyHealth;
+	var champion = false;
+	var playerSelected = false;
 	
 	//Hide attack buttons at start
 	$("#heavy-button, #light-button").hide();
@@ -39,13 +36,11 @@ $(document).ready(function(){
 	var lightSaber  = $("<audio>").attr("src", "assets/audio/clash_01.mp3");
 	var lightSaber2 = $("<audio>").attr("src", "assets/audio/3_clash_2.mp3");
 	var lightSaber3 = $("<audio>").attr("src", "assets/audio/2_clash_2.mp3");
-	//END OF SOUND FILES====================================================
 
-	//Cycle through these sounds
+	//Cycle through these sounds on attack
 	var heavySabers = [heavySaber, heavySaber2, heavySaber3];
-	var heavySounds = 0;
 	var lightSabers = [lightSaber, lightSaber2, lightSaber3];
-	var lightSounds = 0;
+	var heavySounds = 0, lightSounds = 0; //Tracks index of corresponding array
 
 	//Start/loop music
 	themeSong.loop = true;
@@ -53,33 +48,43 @@ $(document).ready(function(){
 
 	//PLAYER selection
 	$(".img-1").on("click", function(){
-		for(var i = 0; i < characters.length; i++){
-			if ($(this).attr("id") === characters[i].id && !playerSelected){
+		//Iterate through characters[]
+		for (var i = 0; i < characters.length; i++) {
+			//If the selected id equals current character id and the player has not selected...
+			if ($(this).attr("id") === characters[i].id && !playerSelected) {
+				
+				//The player has now selected a character
 				player = characters[i];
-				playerIndex = i;
-				newPlayerHealth = player.health;
-				$(".bg-success").css("width", newPlayerHealth + "%");
-				$("#SABERS").html("LIGHTSABER: " + player.sabers);
+				playerHealth = player.health;
+				playerSelected  = true;
+
+				//Update the DOM (name, saber inventory, health bar, hide carousel-1 controls)
 				$("#playerName").html(player.id);
+				$("#SABERS").html("LIGHTSABER: " + player.sabers);
+				$(".bg-success").css("width", playerHealth + "%");
 				$("#carousel-1-prev, #carousel-1-next, #indicators-1").hide();
-				$(saberOn).trigger('play');
-				playerSelected = true;
+				$(saberOn).trigger('play'); //Play the saberOn sound
 			}
 		}
 	});
 
 	//ENEMY selection
-	$(".img-2").on("click", function(){
-		for(var i = 0; i < characters.length; i++){
-			if ($(this).attr("id") === characters[i].id && i !== playerIndex && playerSelected){
+	$(".img-2").on("click", function() {
+		//Iterate through characters[]
+		for (var i = 0; i < characters.length; i++) {
+			//If the selected id equals current character id, the player id is not identical, and player is selected...
+			if ($(this).attr("id") === characters[i].id && $(this).attr("id") !== player.id && playerSelected) {
+				
+				//The enemy is now the selected character
 				enemy = characters[i];
-				newEnemyHealth = enemy.health;
-				$(".bg-danger").css("width", newEnemyHealth + "%");
-				$("#heavy-button").show();
-				$("#light-button").show();
+				enemyHealth = enemy.health;
+
+				//Update DOM (name, health bar, hide carousel-2 controls, show attack btns)
 				$("#enemyName").html(enemy.id);
+				$(".bg-danger").css("width", enemyHealth + "%");
 				$("#carousel-2-prev, #carousel-2-next, #indicators-2").hide();
-				$(saberOn2).trigger('play');
+				$("#heavy-button, #light-button").show();
+				$(saberOn2).trigger('play'); //Play saberOn2 sound
 			}
 		}
 	});
@@ -90,11 +95,11 @@ $(document).ready(function(){
 		$(heavySabers[heavySounds]).trigger('play');
 		(heavySounds < 2)? heavySounds++ : heavySounds = 0
 
-		newEnemyHealth  -= (Math.floor(Math.random() * player.attack)) * playerMultiplier;
-		newPlayerHealth -= Math.floor(Math.random() * enemy.attack);
+		enemyHealth  -= (Math.floor(Math.random() * player.attack)) * playerMultiplier;
+		playerHealth -= Math.floor(Math.random() * enemy.attack);
 
-		$(".bg-danger").css("width", newEnemyHealth + "%");
-		$(".bg-success").css("width", newPlayerHealth + "%");
+		$(".bg-danger").css("width", enemyHealth + "%");
+		$(".bg-success").css("width", playerHealth + "%");
 	});
 
 	//LIGHT ATTACK
@@ -103,28 +108,30 @@ $(document).ready(function(){
 		$(lightSabers[lightSounds]).trigger('play');
 		(lightSounds < 2)? lightSounds++ : lightSounds = 0
 
-		newEnemyHealth  -= (Math.floor(Math.random() * player.lightAttack)) * playerMultiplier;
-		newPlayerHealth -= Math.floor(Math.random() * enemy.lightAttack);
+		enemyHealth  -= (Math.floor(Math.random() * player.lightAttack)) * playerMultiplier;
+		playerHealth -= Math.floor(Math.random() * enemy.lightAttack);
 
-		$(".bg-danger").css("width", newEnemyHealth + "%");
-		$(".bg-success").css("width", newPlayerHealth + "%");
+		$(".bg-danger").css("width", enemyHealth + "%");
+		$(".bg-success").css("width", playerHealth + "%");
 	});
 
 	//Check health levels on every button click
 	$(".btn").on("click", function(){
-		//If enemy dies
-		if (newEnemyHealth <= 0) {
+		
+		//If enemy defeated
+		if (enemyHealth <= 0) {
 			
-			//Player is a champion? Add to championWins. Else, add to wins
-			(champion)? $("#CHAMPWINS").html("CHAMPION WINS: " + (championWins++)): wins++
-			playerMultiplier += 0.05;
-			newPlayerHealth = player.health;
+			//Is the player a champion? Add to championWins. Else, add to wins
+			(champion)? $("#CHAMPWINS").html("CHAMPION WINS: " + (championWins++)) : wins++
+			playerMultiplier += 0.05; //Increase playerMultiplier
+			playerHealth = player.health; //Refill playerHealth
+
+			//Update DOM
 			$("#enemyName").html("OPPONENT");
-			$("#heavy-button").hide();
-			$("#light-button").hide();
+			$("#heavy-button, #light-button").hide();
 			$("#carousel-2-prev, #carousel-2-next, #indicators-2").show();
-			$(".bg-danger").css("width", newEnemyHealth + "%");
-			$(".bg-success").css("width", newPlayerHealth + "%");
+			$(".bg-danger").css("width", enemyHealth + "%");
+			$(".bg-success").css("width", playerHealth + "%");
 			$("#WINS").html("WINS: " + wins);
 
 			//Check if the enemy's lightsaber is in player inventory
@@ -132,6 +139,7 @@ $(document).ready(function(){
 				player.sabers.push(enemy.sabers[0]);
 				$("#SABERS").html("LIGHTSABERS: " + player.sabers);
 			}
+
 			//Check if all lightsabers acquired
 			if (player.sabers.length === characters.length && !champion) {
 				alert("YOU ARE THE GALACTIC CHAMPION!");
@@ -139,25 +147,25 @@ $(document).ready(function(){
 			}
 		}
 
-		//If player dies
-		if (newPlayerHealth <= 0) {
+		//If player defeated
+		if (playerHealth <= 0) {
 			
-			//Update selection, multiplier, losses
+			//Update selection, champion status, multiplier, losses
 			playerSelected   = false, champion = false;
 			playerMultiplier = 1.00;
 			losses += 1;
 
-			//Remove all acquired sabers
+			//Remove all acquired sabers and update the inventory
 			player.sabers.length = 1;
 			$("#SABERS").html("LIGHTSABER: " + player.sabers);
 
-			//Update the DOM
+			//Update the DOM (names, losses, hide attack btns, health bars, show carousel controls)
 			$("#playerName").html("PLAYER");
 			$("#enemyName").html("OPPONENT");
 			$("#LOSSES").html("LOSSES: " + losses);
 			$("#heavy-button, #light-button").hide();
-			$(".bg-danger").css("width", newEnemyHealth + "%");
-			$(".bg-success").css("width", newPlayerHealth + "%");
+			$(".bg-danger").css("width", enemyHealth + "%");
+			$(".bg-success").css("width", playerHealth + "%");
 			$("#carousel-1-prev, #carousel-1-next, #indicators-1, #carousel-2-prev, #carousel-2-next, #indicators-2").show();
 		}
 	});
