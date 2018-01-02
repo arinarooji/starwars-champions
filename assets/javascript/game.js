@@ -27,8 +27,6 @@ $(document).ready(function(){
 	var themeSong   = $("<audio>").attr("src", "assets/audio/starWarsTheme.mp3");
 	var saberOn     = $("<audio>").attr("src", "assets/audio/SaberOn.mp3");
 	var saberOn2    = $("<audio>").attr("src", "assets/audio/SaberOn2.mp3");
-	var hoverSaber  = $("<audio>").attr("src", "assets/audio/Hum_4.mp3");
-	var hoverSaber2 = $("<audio>").attr("src", "assets/audio/Hum_1.mp3");
 	var heavySaber  = $("<audio>").attr("src", "assets/audio/lasrhit2.mp3");
 	var heavySaber2 = $("<audio>").attr("src", "assets/audio/LSwall01.mp3");
 	var heavySaber3 = $("<audio>").attr("src", "assets/audio/lasrhit3.mp3");
@@ -91,9 +89,7 @@ $(document).ready(function(){
 
 		enemyHealth  -= (Math.floor(Math.random() * player.attack)) * playerMultiplier;
 		playerHealth -= Math.floor(Math.random() * enemy.attack);
-
-		$(".enemyHealth").css("width", enemyHealth + "%");
-		$(".playerHealth").css("width", playerHealth + "%");
+		UpdateHealthBars(playerHealth, enemyHealth);
 	});
 
 	//LIGHT ATTACK
@@ -104,9 +100,7 @@ $(document).ready(function(){
 
 		enemyHealth  -= (Math.floor(Math.random() * player.lightAttack)) * playerMultiplier;
 		playerHealth -= Math.floor(Math.random() * enemy.lightAttack);
-
-		$(".enemyHealth").css("width", enemyHealth + "%");
-		$(".playerHealth").css("width", playerHealth + "%");
+		UpdateHealthBars(playerHealth, enemyHealth);
 	});
 
 	//Check health levels on every button click
@@ -124,9 +118,8 @@ $(document).ready(function(){
 			$("#enemyName").html("OPPONENT");
 			$("#heavy-button, #light-button").hide();
 			$("#carousel-2-prev, #carousel-2-next, #indicators-2").show();
-			$(".enemyHealth").css("width", enemyHealth + "%");
-			$(".playerHealth").css("width", playerHealth + "%");
 			$("#WINS").html("WINS: " + wins);
+			UpdateHealthBars(playerHealth, enemyHealth);
 
 			//Check if the enemy's lightsaber is in player inventory
 			if (player.sabers.indexOf(enemy.sabers[0]) == -1) {
@@ -158,16 +151,9 @@ $(document).ready(function(){
 			$("#enemyName").html("OPPONENT");
 			$("#LOSSES").html("LOSSES: " + losses);
 			$("#heavy-button, #light-button").hide();
-			$(".enemyHealth").css("width", enemyHealth + "%");
-			$(".playerHealth").css("width", playerHealth + "%");
 			$("#carousel-1-prev, #carousel-1-next, #indicators-1, #carousel-2-prev, #carousel-2-next, #indicators-2").show();
 		}
 	});
-
-	//HEAVY ATTACK HOVER EFFECT
-	$("#heavy-button").hover(function(){ $(hoverSaber).trigger('play'); });
-	//LIGHT ATTACK HOVER EFFECT
-	$("#light-button").hover(function(){ $(hoverSaber2).trigger('play'); });
 
 	//Character constructor
 	function Character(id, health, attack, lightAttack, sabers) {
@@ -176,5 +162,10 @@ $(document).ready(function(){
 		this.attack = attack;
 		this.lightAttack = lightAttack;
 		this.sabers = sabers;
+	}
+
+	function UpdateHealthBars(playerHealth, enemyHealth) {
+		$(".playerHealth").css("width", playerHealth + "%");
+		$(".enemyHealth").css("width", enemyHealth + "%");
 	}
 });
