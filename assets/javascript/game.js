@@ -157,7 +157,7 @@ $(document).ready(function(){
 
 	//Character constructor
 	function Character(id, health, attack, lightAttack, sabers) {
-		this.id 	= id;
+		this.id     = id;
 		this.health = health;
 		this.attack = attack;
 		this.lightAttack = lightAttack;
