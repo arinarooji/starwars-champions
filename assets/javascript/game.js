@@ -114,7 +114,7 @@ $(document).ready(function(){
 	$(".btn").on("click", function(){
 		//If enemy dies
 		if (newEnemyHealth <= 0) {
-			//enemy.defeated = true;
+			
 			//Player is a champion? Add to championWins. Else, add to wins
 			(champion)? $("#CHAMPWINS").html("CHAMPION WINS: " + (championWins++)): wins++
 			playerMultiplier += 0.05;
@@ -143,7 +143,6 @@ $(document).ready(function(){
 		if (newPlayerHealth <= 0) {
 			
 			//Update selection, multiplier, losses
-			//player.defeated  = true;
 			playerSelected   = false, champion = false;
 			playerMultiplier = 1.00;
 			losses += 1;
