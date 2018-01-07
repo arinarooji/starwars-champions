@@ -16,3 +16,9 @@
 - Watch your health! The first to reach zero loses the battle and their lightsaber(s)
 - Defeat all of the other characters to collect their lightsaber and become the galactic champion!
 - Defend your title! Maintain triumphant in battle to increase your champion victories and attack multiplier
+
+#### Future Plans
+- Additional characters
+- Increased visual effects
+- Further code optimization
+- Skills-based combat system
