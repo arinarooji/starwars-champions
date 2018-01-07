@@ -15,7 +15,6 @@ $(document).ready(function(){
 	var player = { health: 100, wins: 0, losses: 0, champWins: 0, isSelected: false, isChampion: false, multiplier: 1.00 };
 	var enemy  = { health: 100 };
 
-	
 	//Hide attack buttons at start
 	$("#heavy-button, #light-button").hide();
 
@@ -35,8 +34,7 @@ $(document).ready(function(){
 	var lightSabers = [lightSaber, lightSaber2, lightSaber3];
 	var heavySounds = 0, lightSounds = 0; //Tracks index of corresponding array
 
-	//Start/loop music
-	themeSong.loop = true;
+	//Start music
 	$(themeSong).trigger('play');
 
 	//CHARACTER selections (Player and Enemy)
@@ -108,7 +106,7 @@ $(document).ready(function(){
 			//Is the player a champion? Add to championWins. Else, add to wins
 			(player.isChampion)? $("#CHAMPWINS").html("CHAMPION WINS: " + (player.champWins++)) : player.wins++
 			player.multiplier += 0.05; //Increase player.multiplier
-			player.health = player.character.health; //Refill playerHealth
+			player.health      = player.character.health; //Refill playerHealth
 
 			//Update DOM
 			$("#enemyName").html("OPPONENT");
@@ -135,8 +133,8 @@ $(document).ready(function(){
 			
 			//Update selection, champion status, multiplier, losses
 			player.isSelected = false, player.isChampion = false;
-			player.multiplier  = 1.00;
-			player.losses += 1;
+			player.multiplier = 1.00;
+			player.losses    += 1;
 
 			//Remove all acquired sabers and update the inventory
 			player.character.sabers.length = 1;
