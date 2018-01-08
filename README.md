@@ -9,7 +9,7 @@
 - [Luke Skywalker](http://starwars.wikia.com/wiki/Luke_Skywalker)
 
 #### Tutorial
-- Go to https://arinarooji.github.io/starwars-game/
+- Visit https://arinarooji.github.io/starwars-game/
 - Choose your player by clicking the player image
 - Choose your opponent by clicking the opponent image *(note that you cannot battle against your own character)*
 - Click either the heavy attack or light attack buttons to damage your opponent
