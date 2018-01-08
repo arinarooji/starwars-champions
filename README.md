@@ -10,7 +10,7 @@
 
 #### Tutorial
 - Visit https://arinarooji.github.io/starwars-game/
-- Choose your player by clicking the player image
+- Choose your player by clicking the player image *(cycle through the characters with the arrow buttons)*
 - Choose your opponent by clicking the opponent image *(note that you cannot battle against your own character)*
 - Click either the heavy attack or light attack buttons to damage your opponent
 - Watch your health! The first to reach zero loses the battle and their lightsaber(s)
